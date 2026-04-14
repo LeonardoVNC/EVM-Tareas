@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
     }
 
     void UpdateUI() {
-        scorer.text = "Puntaje: " + score;
-        timer.text = "Tiempo: " + time.ToString("F1");
+        scorer.text = score+"";
+        timer.text = time.ToString("F1") + " s";
     }
 
     public void AddScore() {
@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
 
         float timeToAdd = Mathf.Max(2f, 4f - (score * 0.2f));
         time += timeToAdd;
+        if (time > 10) {
+            time = 10;
+        }
     }
 
     void GameOver() {
