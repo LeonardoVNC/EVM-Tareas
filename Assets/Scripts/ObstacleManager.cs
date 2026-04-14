@@ -3,7 +3,9 @@ using UnityEngine.InputSystem;
 
 public class ObstacleManager : MonoBehaviour
 {
+    public GameObject monedita;
     private Obstacle[,] grid = new Obstacle[8,8];
+    private float heightUnit = 0.5f;
 
     void Start()
     {
@@ -12,14 +14,8 @@ public class ObstacleManager : MonoBehaviour
 
     void Update() 
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame) {
-            Debug.Log("Test subee");
-            TestDiagonal();
-        }
-    
         if (Keyboard.current.rKey.wasPressedThisFrame) {
-            Debug.Log("Test bajaa");
-            ResetGrid();
+            GenerateLevel(Random.Range(0, 8), Random.Range(0, 8));
         }
     }
 
@@ -44,21 +40,26 @@ public class ObstacleManager : MonoBehaviour
         }
     }
 
+    public void GenerateLevel(int targetX, int targetZ) {
+        monedita.SetActive(false);
 
-
-    //TEST
-
-    void TestDiagonal() {
-        for (int i = 0; i < 8; i++) {
-            SetCubeHeight(i, i, i); 
-        }
-    }
-
-    void ResetGrid() {
         for (int x = 0; x < 8; x++) {
             for (int z = 0; z < 8; z++) {
-                SetCubeHeight(x, z, 0);
+                float distance = Vector2.Distance(new Vector2(x, z), new Vector2(targetX, targetZ));
+                int level = Mathf.Max(0, 5 - Mathf.RoundToInt(distance));
+
+                if (level > 0 && level < 5) {
+                    level += Random.Range(0, 2);
+                }
+
+                SetCubeHeight(x, z, level);
             }
         }
+
+        Vector3 cubePos = grid[targetX, targetZ].transform.position;
+        float targetY = 5 * heightUnit + 3.25f; 
+        monedita.transform.position = new Vector3(cubePos.x, targetY, cubePos.z);
+        
+        monedita.SetActive(true);
     }
 }

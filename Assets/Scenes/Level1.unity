@@ -1219,6 +1219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4c2c4d059858747ba1055239a9e525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleManager
+  monedita: {fileID: 1783655989}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,7 +1307,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.8870109, z: -0.46174863, w: 0}
-  m_LocalPosition: {x: 0, y: 13.5, z: 10}
+  m_LocalPosition: {x: 0, y: 14.5, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3794,6 +3795,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7761657513144245202, guid: fa4d895f5c6e8d54d93d91d2eb97a47e, type: 3}
   m_PrefabInstance: {fileID: 1730180527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1783655989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7290756282066822530, guid: a826603f74e80da4e8eb60cb60563007, type: 3}
+  m_PrefabInstance: {fileID: 4487625054203060753}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1813468723
 PrefabInstance:
