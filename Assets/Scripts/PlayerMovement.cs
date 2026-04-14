@@ -42,9 +42,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("AYY");
         if (other.CompareTag("Moneda"))
         {
+            GameManager.instance.AddScore();
             obsManager.GenerateLevel(Random.Range(0, 8), Random.Range(0, 8));
         }
     }
