@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public static int finalScore;
     
     public TextMeshProUGUI timer;
     public TextMeshProUGUI scorer;
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     void GameOver() {
         isGameOver = true;
+        finalScore = score;
         time = 0;
         UpdateUI();
         SceneManager.LoadScene("WinScreen"); 

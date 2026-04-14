@@ -1,15 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class WinScreen : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public TextMeshProUGUI score; 
+
     void Start()
     {
-        
+        if (score != null) {
+            score.text =  GameManager.finalScore+"";
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         
