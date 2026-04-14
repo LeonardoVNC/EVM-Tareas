@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private bool wasMoving = false;
 
     private ObstacleManager obsManager;
+    public AudioClip coinSound;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -24,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         
         obsManager = Object.FindFirstObjectByType<ObstacleManager>();
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Update() {
@@ -71,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
         {
             GameManager.instance.AddScore();
             obsManager.GenerateLevel(Random.Range(0, 8), Random.Range(0, 8));
+            audioSource.PlayOneShot(coinSound);
         }
     }
 }
