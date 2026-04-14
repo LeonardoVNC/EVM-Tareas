@@ -14,15 +14,11 @@ public class ObstacleManager : MonoBehaviour
 
     void Update() 
     {
-        if (Keyboard.current.rKey.wasPressedThisFrame) {
-            GenerateLevel(Random.Range(0, 8), Random.Range(0, 8));
-        }
     }
 
     void Awake() {
         Obstacle[] allObstacles = GetComponentsInChildren<Obstacle>();
 
-        Debug.Log("Normalizando matriz wiii");
         foreach (Obstacle obs in allObstacles) {
             int xIndex = Mathf.RoundToInt((obs.transform.localPosition.x + 7) / 2);
             int zIndex = Mathf.RoundToInt((obs.transform.localPosition.z + 7) / 2);
@@ -31,7 +27,6 @@ public class ObstacleManager : MonoBehaviour
                 grid[xIndex, zIndex] = obs;
             }
         }
-        Debug.Log("Lista la matriz wiii");
     }
 
     public void SetCubeHeight(int x, int z, int level) {
