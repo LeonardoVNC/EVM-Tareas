@@ -7,11 +7,13 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 5f;
     private Vector2 movementInput;
     private Rigidbody rb;
+    private Animator animator;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     private bool isGrounded;
+    private bool wasMoving = false;
 
     private ObstacleManager obsManager;
 
@@ -19,8 +21,30 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        animator = GetComponentInChildren<Animator>();
         
         obsManager = Object.FindFirstObjectByType<ObstacleManager>();
+    }
+
+    void Update() {
+        Vector3 moveDir = new Vector3(movementInput.x, 0, movementInput.y);
+        if (moveDir.magnitude > 0.1f) {
+            Quaternion targetRot = Quaternion.LookRotation(moveDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 15f);
+        }
+
+        if (animator != null) {
+            bool isMovingNow = moveDir.magnitude > 0.1f;
+
+            if (isMovingNow && !wasMoving) {
+                animator.SetTrigger("run");
+            }
+            else if (!isMovingNow && wasMoving) {
+                animator.SetTrigger("idle");
+            }
+
+            wasMoving = isMovingNow;
+        }
     }
 
     void FixedUpdate() {
@@ -38,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded) {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (animator != null) animator.SetTrigger("jump");
         }
     }
 
